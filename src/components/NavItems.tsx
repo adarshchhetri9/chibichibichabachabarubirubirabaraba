@@ -1,17 +1,33 @@
 "use client";
 
 import { PRODUCT_CATEGORIES } from "@/config";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import NavItem from "./NavItem";
 import { useOnClickOutside } from "@/hooks/use-on-click-outside";
 
 const NavItems = () => {
   const [activeIndex, setActiveIndex] = useState<null | number>(null);
 
+  // When you press escape it close the nav which is open
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveIndex(null);
+      }
+    };
+    document.addEventListener("keydown", handler);
+
+    return () => {
+      document.removeEventListener("keydown", handler);
+    };
+  });
+
   const isAnyOpen = activeIndex !== null;
 
-  const navRef = useRef<HTMLDivElement | null>(null);
+  // When you click anywhere on the screen it will closed nav which is open
 
+  const navRef = useRef<HTMLDivElement | null>(null);
   useOnClickOutside(navRef, () => setActiveIndex(null));
 
   return (
