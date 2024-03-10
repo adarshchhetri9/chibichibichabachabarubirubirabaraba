@@ -18,7 +18,7 @@ const Navbar = async () => {
 
               <div className="ml-4 flex lg:ml-0">
                 <Link href="/">
-                  <Icons.logo className="h-10 w-10" />
+                  <Icons.logo width={"40"} height={40} />
                 </Link>
               </div>
 
